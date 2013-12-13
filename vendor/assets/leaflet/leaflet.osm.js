@@ -92,7 +92,7 @@ L.OSM.DataLayer = L.FeatureGroup.extend({
         }
       }
 
-      layer.addTo(this);
+      this.addLayer(layer);
       layer.feature = feature;
     }
   },

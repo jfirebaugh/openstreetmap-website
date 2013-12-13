@@ -37,7 +37,7 @@ $(document).ready(function () {
       if ($('#updatehome').is(':checked')) {
         var zoom = map.getZoom(),
             precision = zoomPrecision(zoom),
-            location = e.latlng.wrap();
+            location = map.wrapLatLng(e.latlng);
 
         $('#homerow').removeClass();
         $('#home_lat').val(location.lat.toFixed(precision));

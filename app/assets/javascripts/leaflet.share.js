@@ -296,7 +296,7 @@ L.OSM.share = function (options) {
       };
 
       if (map.hasLayer(marker)) {
-        var latLng = marker.getLatLng().wrap();
+        var latLng = map.wrapLatLng(marker.getLatLng());
         params.marker = latLng.lat + ',' + latLng.lng;
       }
 

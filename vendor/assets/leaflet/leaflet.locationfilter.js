@@ -90,9 +90,7 @@ L.Control.ButtonContainer = L.Control.extend({
     }
 });
 
-L.LocationFilter = L.Class.extend({
-    includes: L.Mixin.Events,
-
+L.LocationFilter = L.Layer.extend({
     options: {
         enableButton: {
             enableText: "Select area",
@@ -105,11 +103,6 @@ L.LocationFilter = L.Class.extend({
 
     initialize: function(options) {
         L.Util.setOptions(this, options);
-    },
-
-    addTo: function(map) {
-        map.addLayer(this);
-        return this;
     },
 
     onAdd: function(map) {
@@ -163,7 +156,7 @@ L.LocationFilter = L.Class.extend({
         };
         options = L.Util.extend(defaultOptions, options);
         var rect = new L.Rectangle(bounds, options);
-        rect.addTo(this._layer);
+        this._layer.addLayer(rect);
         return rect;
     },
 
@@ -177,7 +170,7 @@ L.LocationFilter = L.Class.extend({
             }),
             draggable: true
         });
-        marker.addTo(this._layer);
+        this._layer.addLayer(marker);
         return marker;
     },
 

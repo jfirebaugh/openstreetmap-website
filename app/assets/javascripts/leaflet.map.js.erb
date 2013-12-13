@@ -2,10 +2,6 @@ L.extend(L.LatLngBounds.prototype, {
   getSize: function () {
     return (this._northEast.lat - this._southWest.lat) *
            (this._northEast.lng - this._southWest.lng);
-  },
-
-  wrap: function () {
-    return new L.LatLngBounds(this._southWest.wrap(), this._northEast.wrap());
   }
 });
 
@@ -95,7 +91,7 @@ L.OSM.Map = L.Map.extend({
         params = {};
 
     if (marker && this.hasLayer(marker)) {
-      var latLng = marker.getLatLng().wrap();
+      var latLng = this.wrapLatLng(marker.getLatLng());
       params.mlat = latLng.lat.toFixed(precision);
       params.mlon = latLng.lng.toFixed(precision);
     }
@@ -112,7 +108,7 @@ L.OSM.Map = L.Map.extend({
 
   getShortUrl: function(marker) {
     var zoom = this.getZoom(),
-      latLng = marker && this.hasLayer(marker) ? marker.getLatLng().wrap() : this.getCenter().wrap(),
+      latLng = marker && this.hasLayer(marker) ? this.wrapLatLng(marker.getLatLng()) : this.wrapLatLng(this.getCenter()),
       str = window.location.hostname.match(/^www\.openstreetmap\.org/i) ?
         'http://osm.org/go/' : 'http://' + window.location.hostname + '/go/',
       char_array = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_~",
@@ -235,7 +231,7 @@ L.OSM.Map = L.Map.extend({
 
   getState: function() {
     return {
-      center: this.getCenter().wrap(),
+      center: this.wrapLatLng(this.getCenter()),
       zoom: this.getZoom(),
       layers: this.getLayersCode()
     }

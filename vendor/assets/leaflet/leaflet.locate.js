@@ -179,8 +179,8 @@ L.Control.Locate = L.Control.extend({
                 }
 
                 if (!self._circle) {
-                    self._circle = L.circle(self._event.latlng, radius, style)
-                        .addTo(self._layer);
+                    self._circle = L.circle(self._event.latlng, radius, style);
+                    self._layer.addLayer(self._circle);
                 } else {
                     self._circle.setLatLng(self._event.latlng).setRadius(radius);
                 }
@@ -206,8 +206,8 @@ L.Control.Locate = L.Control.extend({
             var t = self.options.strings.popup;
             if (!self._circleMarker) {
                 self._circleMarker = L.circleMarker(self._event.latlng, m)
-                    .bindPopup(L.Util.template(t, {distance: distance, unit: unit}))
-                    .addTo(self._layer);
+                    .bindPopup(L.Util.template(t, {distance: distance, unit: unit}));
+                self._layer.addLayer(self._circleMarker);
             } else {
                 self._circleMarker.setLatLng(self._event.latlng)
                     .bindPopup(L.Util.template(t, {distance: distance, unit: unit}))

@@ -50,7 +50,9 @@ OSM.History = function(map) {
     var data = {list: '1'};
 
     if (window.location.pathname === '/history') {
-      data.bbox = map.getBounds().wrap().toBBoxString();
+      var bounds = map.getBounds();
+      bounds = L.latLngBounds(map.wrapLatLng(bounds.getSouthWest()), map.wrapLatLng(bounds.getNorthEast()));
+      data.bbox = bounds.toBBoxString();
     }
 
     $.ajax({
@@ -108,7 +110,7 @@ OSM.History = function(map) {
         rect = L.rectangle(changeset.bounds,
           {weight: 2, color: "#FF9500", opacity: 1, fillColor: "#FFFFBF", fillOpacity: 0});
       rect.id = changeset.id;
-      rect.addTo(group);
+      group.addLayer(rect);
     }
 
     if (window.location.pathname !== '/history') {

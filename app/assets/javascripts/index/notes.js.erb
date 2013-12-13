@@ -47,7 +47,7 @@ function initializeNotes(map) {
         clickable: true
       });
       marker.id = feature.properties.id;
-      marker.addTo(noteLayer);
+      noteLayer.addLayer(marker);
     }
     return marker;
   }

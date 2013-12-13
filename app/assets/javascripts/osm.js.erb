@@ -141,7 +141,7 @@ OSM = {
     var center, zoom, layers;
 
     if (args instanceof L.Map) {
-      center = args.getCenter();
+      center = args.wrapLatLng(args.getCenter());
       zoom = args.getZoom();
       layers = args.getLayersCode();
     } else {
@@ -150,7 +150,6 @@ OSM = {
       layers = args.layers || '';
     }
 
-    center = center.wrap();
     layers = layers.replace('M', '');
 
     var precision = zoomPrecision(zoom),

@@ -103,7 +103,7 @@ function updateLinks(loc, zoom, layers, object) {
 
 // generate a cookie-safe string of map state
 function cookieContent(map) {
-  var center = map.getCenter().wrap();
+  var center = map.wrapLatLng(map.getCenter());
   return [center.lng, center.lat, map.getZoom(), map.getLayersCode()].join('|');
 }
 

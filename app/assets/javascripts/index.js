@@ -145,7 +145,7 @@ $(document).ready(function () {
 
   map.on('moveend layeradd layerremove', function() {
     updateLinks(
-      map.getCenter().wrap(),
+      map.wrapLatLng(map.getCenter()),
       map.getZoom(),
       map.getLayersCode(),
       map._object);

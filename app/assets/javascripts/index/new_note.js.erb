@@ -34,7 +34,7 @@ OSM.NewNote = function(map) {
   });
 
   function createNote(marker, form, url) {
-    var location = marker.getLatLng().wrap();
+    var location = map.wrapLatLng(marker.getLatLng());
 
     marker.options.draggable = false;
     marker.dragging.disable();
@@ -72,7 +72,7 @@ OSM.NewNote = function(map) {
       clickable: true
     });
     marker.id = feature.properties.id;
-    marker.addTo(noteLayer);
+    noteLayer.addLayer(marker);
     return marker;
   }
 
@@ -126,7 +126,7 @@ OSM.NewNote = function(map) {
       newHalo(newNote.getLatLng(), a.type);
     });
 
-    newNote.addTo(noteLayer);
+    noteLayer.addLayer(newNote);
     newHalo(newNote.getLatLng());
 
     newNote.on("remove", function () {
